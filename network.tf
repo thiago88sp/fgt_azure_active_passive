@@ -1,3 +1,66 @@
+###########################################################################################
+#                                 Network Resources                                       #
+###########################################################################################
+
+// Vnets
+
+resource "azurerm_virtual_network" "res-40" {
+  address_space       = [var.vnetcidr]
+  location            = var.location
+  name                = "Vnet-Customer-Sdwan"
+  resource_group_name = azurerm_resource_group.res-0.name
+  tags = {
+    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+  }
+}
+
+// Subnets
+
+resource "azurerm_subnet" "publicsubnet" {
+  address_prefixes     = [var.publiccidr]
+  name                 = "FortinetExternalSubnet"
+  resource_group_name  = azurerm_resource_group.res-0.name
+  virtual_network_name = azurerm_virtual_network.res-40.name
+  depends_on = [
+    azurerm_resource_group.res-0,
+    azurerm_virtual_network.res-40,
+  ]
+}
+resource "azurerm_subnet" "hasyncsubnet" {
+  address_prefixes     = [var.hacidr]
+  name                 = "FortinetHASyncSubnet"
+  resource_group_name  = azurerm_resource_group.res-0.name
+  virtual_network_name = azurerm_virtual_network.res-40.name
+  depends_on = [
+    azurerm_resource_group.res-0,
+    azurerm_virtual_network.res-40,
+  ]
+}
+resource "azurerm_subnet" "privatesubnet" {
+  address_prefixes     = [var.privatecidr]
+  name                 = "FortinetInternalSubnet"
+  resource_group_name  = azurerm_resource_group.res-0.name
+  virtual_network_name = azurerm_virtual_network.res-40.name
+  depends_on = [
+    azurerm_resource_group.res-0,
+    azurerm_virtual_network.res-40,
+  ]
+}
+resource "azurerm_subnet" "mgmtsubnet" {
+  address_prefixes     = [var.mgmtcidr]
+  name                 = "FortinetManagementSubnet"
+  resource_group_name  = azurerm_resource_group.res-0.name
+  virtual_network_name = azurerm_virtual_network.res-40.name
+  depends_on = [
+    azurerm_resource_group.res-0,
+    azurerm_virtual_network.res-40,
+  ]
+}
+
+// Load Balancers
+
+#------------------------------ ELB ----------------------------------#
+
 resource "azurerm_lb" "externalLB" {
   location            = var.location
   name                = "FGT-Customer-ExternalLoadBalancer"
@@ -14,6 +77,9 @@ resource "azurerm_lb" "externalLB" {
     azurerm_resource_group.res-0,
   ]
 }
+
+// ELB - Backend Address Pool
+
 resource "azurerm_lb_backend_address_pool" "res-8" {
   loadbalancer_id = azurerm_lb.externalLB.id
   name            = "FGT-Customer-ELB-FortinetExternalSubnet-BackEnd"
@@ -23,11 +89,15 @@ resource "azurerm_lb_backend_address_pool" "res-8" {
   ]
 }
 
+// ELB - Probe
+
 resource "azurerm_lb_probe" "externalLB-rule-probe" {
   loadbalancer_id = azurerm_lb.externalLB.id
   name            = "lbprobe"
   port            = 8008
 }
+
+// ELB - Rule
 
 resource "azurerm_lb_rule" "externalLB-rule" {
   loadbalancer_id                = azurerm_lb.externalLB.id
@@ -51,6 +121,8 @@ resource "azurerm_lb_rule" "externalLB-rule-2" {
   probe_id                       = azurerm_lb_probe.externalLB-rule-probe.id
 }
 
+#------------------------------ ILB ----------------------------------#
+
 resource "azurerm_lb" "internalLB" {
   location            = var.location
   name                = "FGT-Customer-InternalLoadBalancer"
@@ -69,11 +141,26 @@ resource "azurerm_lb" "internalLB" {
   ]
 }
 
+// ILB - Backend Address Pool
+
+resource "azurerm_lb_backend_address_pool" "res-10" {
+  loadbalancer_id = azurerm_lb.internalLB.id
+  name            = "FGT-Customer-ILB-FortinetInternalSubnet-BackEnd"
+  depends_on = [
+    azurerm_resource_group.res-0,
+    azurerm_lb.internalLB,
+  ]
+}
+
+// ILB - Probe
+
 resource "azurerm_lb_probe" "internalLB-rule-probe" {
   loadbalancer_id = azurerm_lb.internalLB.id
   name            = "lbprobe"
   port            = 8008
 }
+
+// ILB - Rule
 
 resource "azurerm_lb_rule" "internalLB-rule" {
   loadbalancer_id                = azurerm_lb.internalLB.id
@@ -86,18 +173,10 @@ resource "azurerm_lb_rule" "internalLB-rule" {
   probe_id                       = azurerm_lb_probe.internalLB-rule-probe.id
 }
 
-resource "azurerm_lb_backend_address_pool" "res-10" {
-  loadbalancer_id = azurerm_lb.internalLB.id
-  name            = "FGT-Customer-ILB-FortinetInternalSubnet-BackEnd"
-  depends_on = [
-    azurerm_resource_group.res-0,
-    azurerm_lb.internalLB,
-  ]
-}
 
-// NicsNetwork Interfaces
+#------------------------------ Network Interfaces ----------------------------------#
 
-#------------------------------ VM A ----------------------------------#
+// VM Active
 
 resource "azurerm_network_interface" "activeport1" {
   enable_accelerated_networking = true
@@ -189,7 +268,7 @@ resource "azurerm_network_interface" "activeport4" {
   ]
 }
 
-#------------------------------ VM B ----------------------------------#
+// VM Passive
 
 resource "azurerm_network_interface" "passiveport1" {
   enable_accelerated_networking = true
@@ -481,52 +560,5 @@ resource "azurerm_public_ip" "ClusterPublicIP" {
   zones = ["1", "2", "3"]
 }
 
-resource "azurerm_virtual_network" "res-40" {
-  address_space       = [var.vnetcidr]
-  location            = var.location
-  name                = "Vnet-Customer-Sdwan"
-  resource_group_name = azurerm_resource_group.res-0.name
-  tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
-  }
-}
-resource "azurerm_subnet" "publicsubnet" {
-  address_prefixes     = [var.publiccidr]
-  name                 = "FortinetExternalSubnet"
-  resource_group_name  = azurerm_resource_group.res-0.name
-  virtual_network_name = azurerm_virtual_network.res-40.name
-  depends_on = [
-    azurerm_resource_group.res-0,
-    azurerm_virtual_network.res-40,
-  ]
-}
-resource "azurerm_subnet" "hasyncsubnet" {
-  address_prefixes     = [var.hacidr]
-  name                 = "FortinetHASyncSubnet"
-  resource_group_name  = azurerm_resource_group.res-0.name
-  virtual_network_name = azurerm_virtual_network.res-40.name
-  depends_on = [
-    azurerm_resource_group.res-0,
-    azurerm_virtual_network.res-40,
-  ]
-}
-resource "azurerm_subnet" "privatesubnet" {
-  address_prefixes     = [var.privatecidr]
-  name                 = "FortinetInternalSubnet"
-  resource_group_name  = azurerm_resource_group.res-0.name
-  virtual_network_name = azurerm_virtual_network.res-40.name
-  depends_on = [
-    azurerm_resource_group.res-0,
-    azurerm_virtual_network.res-40,
-  ]
-}
-resource "azurerm_subnet" "mgmtsubnet" {
-  address_prefixes     = [var.mgmtcidr]
-  name                 = "FortinetManagementSubnet"
-  resource_group_name  = azurerm_resource_group.res-0.name
-  virtual_network_name = azurerm_virtual_network.res-40.name
-  depends_on = [
-    azurerm_resource_group.res-0,
-    azurerm_virtual_network.res-40,
-  ]
-}
+
+
