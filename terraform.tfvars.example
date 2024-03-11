@@ -1,5 +1,5 @@
 // Change to your own azure environment
-subscription_id = "cf72478e-c3b0-4072-8f60-41d037c1d9e9"              #SE-Subscription
-client_id       = "9e6f32ed-a86c-4346-8d25-03a09521a6bc"
-client_secret   = "SFw8Q~5Nt0Xc.DGDHcbFAKoVHXR-olznw4BUlcdp"
-tenant_id       = "942b80cd-1b14-42a1-8dcf-4b21dece61ba"
+subscription_id = "<fill your subscription id>"
+client_id       = "<fill your cient id>"
+client_secret   = "<fill your client secret>"
+tenant_id       = "<fill your tenant id>"
