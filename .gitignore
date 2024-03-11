@@ -38,3 +38,4 @@ terraform.rc
 terraform.tfvars
 license.txt
 license2.txt
+**/ha-port1-mgmt-3ports
