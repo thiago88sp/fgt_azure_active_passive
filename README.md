@@ -10,11 +10,11 @@ In Microsoft Azure, you can deploy an active/passive pair of FortiGate VMs that 
 
 This Terraform template will automatically deploy a full working environment containing the following components.
 
-- 2 FortiGate firewall's in an active/passive deployment
-- 1 external Azure Standard Load Balancer for communication with internet
-- 1 internal Azure Standard Load Balancer to receive all internal traffic and forwarding towards Azure Gateways connecting ExpressRoute or Azure VPN's
-- 1 VNET with 4 subnets required for the FortiGate deployment (external, internal, ha sync and ha mgmt). If using an existing vnet, it must already have 4 subnets
-- 3 public IPs. The first public IP is for cluster access to/through the active FortiGate. The other two PIPs are for Management access
+* 2 FortiGate firewall's in an active/passive deployment
+* 1 external Azure Standard Load Balancer for communication with internet
+* 1 internal Azure Standard Load Balancer to receive all internal traffic and forwarding towards Azure Gateways connecting ExpressRoute or Azure VPN's
+* 1 VNET with 4 subnets required for the FortiGate deployment (external, internal, ha sync and ha mgmt). If using an existing vnet, it must already have 4 subnets
+* 3 public IPs. The first public IP is for cluster access to/through the active FortiGate. The other two PIPs are for Management access
 User Defined Routes (UDR) for the protected subnets (Validate)
 
 ![image](https://github.com/thiago88sp/fgt_azure_active_passive/assets/54182968/0b7295f9-83e5-4c23-b9c2-d87371726986)
