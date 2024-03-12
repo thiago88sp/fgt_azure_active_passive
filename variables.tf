@@ -162,7 +162,7 @@ variable "admin_password" {
 
 variable "size" {
   type    = string
-  default = "Standard_DS4_v2"
+  default = "Standard_DS3_v2"
 }
 
 variable "disk_size_gb" {
