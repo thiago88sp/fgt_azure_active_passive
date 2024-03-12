@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "res-40" {
   name                = "Vnet-Customer-Sdwan"
   resource_group_name = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
 }
 
@@ -67,7 +67,7 @@ resource "azurerm_lb" "externalLB" {
   resource_group_name = azurerm_resource_group.res-0.name
   sku                 = "Standard"
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   frontend_ip_configuration {
     name                 = "FGT-Customer-ELB-FortinetExternalSubnet-FrontEnd"
@@ -129,7 +129,7 @@ resource "azurerm_lb" "internalLB" {
   resource_group_name = azurerm_resource_group.res-0.name
   sku                 = "Standard"
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   frontend_ip_configuration {
     name      = "FGT-Customer-ILB-FortinetInternalSubnet-FrontEnd"
@@ -185,7 +185,7 @@ resource "azurerm_network_interface" "activeport1" {
   name                          = "FGT-Customer01-Nic1"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -207,7 +207,7 @@ resource "azurerm_network_interface" "activeport2" {
   name                          = "FGT-Customer01-Nic2"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -228,7 +228,7 @@ resource "azurerm_network_interface" "activeport3" {
   name                          = "FGT-Customer01-Nic3"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -250,7 +250,7 @@ resource "azurerm_network_interface" "activeport4" {
   name                          = "FGT-Customer01-Nic4"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -277,7 +277,7 @@ resource "azurerm_network_interface" "passiveport1" {
   name                          = "FGT-Customer02-Nic1"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -299,7 +299,7 @@ resource "azurerm_network_interface" "passiveport2" {
   name                          = "FGT-Customer02-Nic2"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -322,7 +322,7 @@ resource "azurerm_network_interface" "passiveport3" {
   name                          = "FGT-Customer02-Nic3"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -344,7 +344,7 @@ resource "azurerm_network_interface" "passiveport4" {
   name                          = "FGT-Customer02-Nic4"
   resource_group_name           = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   ip_configuration {
     name                          = "ipconfig1"
@@ -486,7 +486,7 @@ resource "azurerm_network_security_group" "res-31" {
   name                = "FGT-Customer-anrsqfr4sbm2u-NSG"
   resource_group_name = azurerm_resource_group.res-0.name
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
 }
 resource "azurerm_network_security_rule" "res-32" {
@@ -532,7 +532,7 @@ resource "azurerm_public_ip" "ActiveMGMTIP" {
   resource_group_name = azurerm_resource_group.res-0.name
   sku                 = "Standard"
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   zones = ["1", "2", "3"]
 }
@@ -543,7 +543,7 @@ resource "azurerm_public_ip" "PassiveMGMTIP" {
   resource_group_name = azurerm_resource_group.res-0.name
   sku                 = "Standard"
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   zones = ["1", "2", "3"]
 }
@@ -555,7 +555,7 @@ resource "azurerm_public_ip" "ClusterPublicIP" {
   resource_group_name = azurerm_resource_group.res-0.name
   sku                 = "Standard"
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   zones = ["1", "2", "3"]
 }

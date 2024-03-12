@@ -14,7 +14,7 @@ resource "azurerm_linux_virtual_machine" "passivefgtvm" {
   resource_group_name = azurerm_resource_group.res-0.name
   size                = var.size
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   zone = "2"
   boot_diagnostics {}
@@ -97,7 +97,7 @@ resource "azurerm_managed_disk" "res-2" {
   disk_size_gb         = var.disk_size_gb
 
   tags = {
-    provider = "6EB3B02F-50E5-4A3E-8CB8-2E12925831AP"
+    Source = "terraform"
   }
   zone = "2"
   depends_on = [ azurerm_resource_group.res-0 ]
