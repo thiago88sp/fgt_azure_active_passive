@@ -94,6 +94,8 @@ resource "azurerm_lb_backend_address_pool" "res-8" {
 resource "azurerm_lb_probe" "externalLB-rule-probe" {
   loadbalancer_id = azurerm_lb.externalLB.id
   name            = "lbprobe"
+  protocol        = "Http"
+  request_path        = "/"
   port            = 8008
 }
 
@@ -157,6 +159,8 @@ resource "azurerm_lb_backend_address_pool" "res-10" {
 resource "azurerm_lb_probe" "internalLB-rule-probe" {
   loadbalancer_id = azurerm_lb.internalLB.id
   name            = "lbprobe"
+  protocol        = "Http"
+  request_path        = "/"
   port            = 8008
 }
 
