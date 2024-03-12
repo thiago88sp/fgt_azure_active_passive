@@ -17,8 +17,7 @@ This Terraform template will automatically deploy a full working environment con
 * 3 public IPs. The first public IP is for cluster access to/through the active FortiGate. The other two PIPs are for Management access
 User Defined Routes (UDR) for the protected subnets (Validate)
 
-![image](https://github.com/thiago88sp/fgt_azure_active_passive/assets/54182968/0b7295f9-83e5-4c23-b9c2-d87371726986)
-
+![image](https://github.com/thiago88sp/fgt_azure_active_passive/assets/54182968/fed52167-7ccf-49d6-a847-3faea3118d3d)
 
 
 
