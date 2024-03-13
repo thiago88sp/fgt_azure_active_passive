@@ -38,7 +38,7 @@ resource "azurerm_linux_virtual_machine" "passivefgtvm" {
     offer     = "fortinet_fortigate-vm_v5"
     publisher = "fortinet"
     sku       = "fortinet_fg-vm"
-    version   = "7.0.11"
+    version   = "7.4.3"
   }
 
   custom_data = base64encode(templatefile("${var.bootstrap-passive}", {
