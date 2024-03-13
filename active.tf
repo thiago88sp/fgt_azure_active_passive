@@ -51,6 +51,7 @@ resource "azurerm_linux_virtual_machine" "activefgtvm" {
     passive_peerip  = var.passiveport3,
     mgmt_gateway_ip = var.port4gateway,
     defaultgwy      = var.port1gateway,
+    trust_gw        = var.port2gateway,
     tenant          = var.tenant_id,
     subscription    = var.subscription_id,
     clientid        = var.client_id,
