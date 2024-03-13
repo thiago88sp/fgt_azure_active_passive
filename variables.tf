@@ -37,22 +37,27 @@ variable "privatecidr" {
   description = "Private subnet address space"
 }
 
+variable "hacidr" {
+  default = "172.18.10.192/26"
+  description = "HA subnet address space"
+}
+
 variable "mgmtcidr" {
   default = "172.18.10.128/26"
   description = "HA subnet address space"
 }
 
-variable "port1gateway" {
-  default = "172.18.10.129"
-}
 
-variable "port2gateway" {
+variable "port1gateway" {
   default = "172.18.10.1"
 }
 
-variable "hacidr" {
-  default = "172.18.10.192/26"
-  description = "HA subnet address space"
+variable "port2gateway" {
+  default = "172.18.10.65"
+}
+
+variable "port4gateway" {
+  default = "172.18.10.129"
 }
 
 
