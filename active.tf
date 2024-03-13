@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine" "activefgtvm" {
     offer     = "fortinet_fortigate-vm_v5"
     publisher = "fortinet"
     sku       = "fortinet_fg-vm"
-    version   = "7.4.3"
+    version   = "7.4.3" //To validate the latest version. "az vm image list --offer fortinet_fortigate-vm_v5 --publisher fortinet --all --query "[].{Sku:sku, Version:version}" --output table"
   }
 
   custom_data = base64encode(templatefile("${var.bootstrap-active}", {
