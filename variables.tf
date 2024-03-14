@@ -203,14 +203,14 @@ variable "bootstrap-active" {
   // Change to your own path
   type    = string
   default = "fgtvma-active.conf"
-  description = "Configuration file for the "Active" Fortigate."
+  description = "Configuration file for the 'Active' Fortigate."
 }
 
 variable "bootstrap-passive" {
   // Change to your own path
   type    = string
   default = "fgtvmb-passive.conf"
-  description = "Configuration file for the "Passive" Fortigate."
+  description = "Configuration file for the 'Passive' Fortigate."
 }
 
 // License Type to create FortiGate-VM
@@ -225,14 +225,14 @@ variable "license" {
   // Change to your own byol license file, license.lic
   type    = string
   default = "license.txt"
-  description = "File where the Fortiflex license for the "Active" Fortigate is placed."
+  description = "File where the Fortiflex license for the 'Active' Fortigate is placed."
 }
 
 variable "license2" {
   // Change to your own byol license file, license.lic
   type    = string
   default = "license2.txt"
-  description = "File where the Fortiflex license for the "Passive" Fortigate is placed."
+  description = "File where the Fortiflex license for the 'Passive' Fortigate is placed."
 }
 
 variable "customer_prefix" {
