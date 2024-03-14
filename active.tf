@@ -74,7 +74,7 @@ resource "azurerm_linux_virtual_machine" "activefgtvm" {
 resource "azurerm_managed_disk" "res-1" {
   create_option        = "Empty"
   location             = var.location
-  name                 = "FGT-Customer01_disk2_f066a9849e0740d5a82f3d266f56fbca"
+  name                 = "FGT-Customer01_disk2"
   resource_group_name  = azurerm_resource_group.res-0.name
   storage_account_type = "Premium_LRS"
   disk_size_gb         = var.disk_size_gb
