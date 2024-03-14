@@ -3,7 +3,7 @@ resource "azurerm_linux_virtual_machine" "passivefgtvm" {
   admin_username                  = var.admin_username
   disable_password_authentication = false
   location                        = var.location
-  name                            = "FGT-Customer02"
+  name                            = "FGT-${local.customer_prefix}-02"
   network_interface_ids = [
     azurerm_network_interface.passiveport1.id,
     azurerm_network_interface.passiveport2.id,
@@ -13,9 +13,8 @@ resource "azurerm_linux_virtual_machine" "passivefgtvm" {
 
   resource_group_name = azurerm_resource_group.res-0.name
   size                = var.size
-  tags = {
-    Source = "terraform"
-  }
+  tags                = local.common_tags
+
   zone = "2"
   boot_diagnostics {}
 
@@ -77,7 +76,7 @@ resource "azurerm_linux_virtual_machine" "passivefgtvm" {
 
 
 resource "azurerm_virtual_machine_data_disk_attachment" "res-6" {
-  caching            = "None"
+  caching = "None"
   #create_option      = "Empty"
   lun                = 0
   managed_disk_id    = azurerm_managed_disk.res-2.id
@@ -92,14 +91,13 @@ resource "azurerm_virtual_machine_data_disk_attachment" "res-6" {
 resource "azurerm_managed_disk" "res-2" {
   create_option        = "Empty"
   location             = var.location
-  name                 = "FGT-Customer02_disk2_7e0a588d60eb45b1b495daf3cbdd6f4a"
+  name                 = "${local.customer_prefix}_disk2"
   resource_group_name  = azurerm_resource_group.res-0.name
-  storage_account_type = "Premium_LRS"
+  storage_account_type = var.storage_account_type
   disk_size_gb         = var.disk_size_gb
 
-  tags = {
-    Source = "terraform"
-  }
-  zone = "2"
-  depends_on = [ azurerm_resource_group.res-0 ]
+  tags = local.common_tags
+
+  zone       = "2"
+  depends_on = [azurerm_resource_group.res-0]
 }

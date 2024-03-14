@@ -3,7 +3,7 @@ resource "azurerm_linux_virtual_machine" "activefgtvm" {
   admin_username                  = var.admin_username
   disable_password_authentication = false
   location                        = var.location
-  name                            = "FGT-Customer01"
+  name                            = "FGT-${local.customer_prefix}-01"
   network_interface_ids = [
     azurerm_network_interface.activeport1.id,
     azurerm_network_interface.activeport2.id,
@@ -74,20 +74,20 @@ resource "azurerm_linux_virtual_machine" "activefgtvm" {
 resource "azurerm_managed_disk" "res-1" {
   create_option        = "Empty"
   location             = var.location
-  name                 = "FGT-Customer01_disk2"
+  name                 = "${local.customer_prefix}_disk2"
   resource_group_name  = azurerm_resource_group.res-0.name
-  storage_account_type = "Premium_LRS"
+  storage_account_type = var.storage_account_type
   disk_size_gb         = var.disk_size_gb
 
   tags = {
     Source = "terraform"
   }
-  zone = "1"
-  depends_on = [ azurerm_resource_group.res-0 ]
+  zone       = "1"
+  depends_on = [azurerm_resource_group.res-0]
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "res-4" {
-  caching            = "None"
+  caching = "None"
   #create_option      = "Empty"
   lun                = 0
   managed_disk_id    = azurerm_managed_disk.res-1.id
