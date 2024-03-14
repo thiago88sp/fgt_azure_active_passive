@@ -1,5 +1,6 @@
 output "ResourceGroup" {
   value = azurerm_resource_group.res-0.name
+  description = "Resource Group where the FortiGates are placed"
 }
 
 output "ActiveMGMTPublicIP" {
