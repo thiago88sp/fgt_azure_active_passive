@@ -44,20 +44,24 @@ variable "mgmtcidr" {
 
 variable "port1gateway" {
   default = "172.18.10.1"
+  description = "Public subnet gateway IP."
 }
 
 variable "port2gateway" {
   default = "172.18.10.65"
+  description = "Private subnet gateway IP."
 }
 
 variable "port4gateway" {
   default = "172.18.10.129"
+  description = "HA subnet gateway IP."
 }
 
 
 variable "adminsport" {
   type    = string
   default = "8443"
+  description = "Fortigate administration port."
 }
 
 // NIC - Active VM
@@ -69,6 +73,7 @@ variable "activeport1" {
 
 variable "activeport1mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'untrusted'."
 }
 
 variable "activeport2" {
@@ -78,6 +83,7 @@ variable "activeport2" {
 
 variable "activeport2mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'trusted'."
 }
 
 variable "activeport3" {
@@ -87,6 +93,7 @@ variable "activeport3" {
 
 variable "activeport3mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'HA'."
 }
 
 variable "activeport4" {
@@ -96,6 +103,7 @@ variable "activeport4" {
 
 variable "activeport4mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'MGMT'."
 }
 
 
@@ -108,6 +116,7 @@ variable "passiveport1" {
 
 variable "passiveport1mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'untrusted'."
 }
 
 variable "passiveport2" {
@@ -117,6 +126,7 @@ variable "passiveport2" {
 
 variable "passiveport2mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'trusted'."
 }
 
 variable "passiveport3" {
@@ -126,6 +136,7 @@ variable "passiveport3" {
 
 variable "passiveport3mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'HA'."
 }
 
 variable "passiveport4" {
@@ -135,6 +146,7 @@ variable "passiveport4" {
 
 variable "passiveport4mask" {
   default = "255.255.255.192"
+  description = "NIC netmask 'MGMT'."
 }
 
 // Load balancer variables
@@ -142,6 +154,7 @@ variable "passiveport4mask" {
 variable "sku_lb" {
   type = string
   default = "Standard"
+  description = "Load Balancer SKU"
 }
 
 
@@ -155,13 +168,13 @@ variable "sku_lb" {
 variable "admin_username" {
   type        = string
   default     = "tsp"
-  description = "Password to VMSS"
+  description = "Fortigate access user"
 }
 
 variable "admin_password" {
   type        = string
   default     = "Passw0rd"
-  description = "Password to VMSS"
+  description = "Fortigate access password"
 }
 
 // VM Settings
@@ -169,11 +182,13 @@ variable "admin_password" {
 variable "storage_account_type" {
   type    = string
   default = "Premium_LRS"
+  description = "Storage type chosen for the managed disk."
 }
 
 variable "size" {
   type    = string
   default = "Standard_DS3_v2"
+  description = "Virtual machine SKU."
 }
 
 variable "disk_size_gb" {
@@ -188,18 +203,21 @@ variable "bootstrap-active" {
   // Change to your own path
   type    = string
   default = "fgtvma-active.conf"
+  description = "Configuration file for the "Active" Fortigate."
 }
 
 variable "bootstrap-passive" {
   // Change to your own path
   type    = string
   default = "fgtvmb-passive.conf"
+  description = "Configuration file for the "Passive" Fortigate."
 }
 
 // License Type to create FortiGate-VM
 // Provide the license type for FortiGate-VM Instances.
 variable "license_type" {
   default = "byol"
+  description = "Licensing type."
 }
 
 // license file for the active fgt
@@ -207,12 +225,14 @@ variable "license" {
   // Change to your own byol license file, license.lic
   type    = string
   default = "license.txt"
+  description = "File where the Fortiflex license for the "Active" Fortigate is placed."
 }
 
 variable "license2" {
   // Change to your own byol license file, license.lic
   type    = string
   default = "license2.txt"
+  description = "File where the Fortiflex license for the "Passive" Fortigate is placed."
 }
 
 variable "customer_prefix" {
