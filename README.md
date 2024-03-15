@@ -32,7 +32,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.95.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
 
 ## Modules
 
@@ -144,10 +144,10 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ActiveMGMTPublicIP"></a> [ActiveMGMTPublicIP](#output\_ActiveMGMTPublicIP) | FGT-A-MGMT-PIP |
-| <a name="output_FrontendIP-ELB"></a> [FrontendIP-ELB](#output\_FrontendIP-ELB) | n/a |
-| <a name="output_FrontendIP-ILB"></a> [FrontendIP-ILB](#output\_FrontendIP-ILB) | n/a |
-| <a name="output_PassiveMGMTPublicIP"></a> [PassiveMGMTPublicIP](#output\_PassiveMGMTPublicIP) | FGT-B-MGMT-PIP |
-| <a name="output_Password"></a> [Password](#output\_Password) | n/a |
-| <a name="output_ResourceGroup"></a> [ResourceGroup](#output\_ResourceGroup) | n/a |
-| <a name="output_Username"></a> [Username](#output\_Username) | n/a |
+| <a name="output_ActiveMGMTPublicIP"></a> [ActiveMGMTPublicIP](#output\_ActiveMGMTPublicIP) | Access to management console on 'Active' Fortigate. |
+| <a name="output_FrontendIP-ELB"></a> [FrontendIP-ELB](#output\_FrontendIP-ELB) | External Load Balancer public IP. |
+| <a name="output_FrontendIP-ILB"></a> [FrontendIP-ILB](#output\_FrontendIP-ILB) | Internal Load Balancer private IP. |
+| <a name="output_PassiveMGMTPublicIP"></a> [PassiveMGMTPublicIP](#output\_PassiveMGMTPublicIP) | Access to management console on 'Passive' Fortigate. |
+| <a name="output_Password"></a> [Password](#output\_Password) | Fortigate access password |
+| <a name="output_ResourceGroup"></a> [ResourceGroup](#output\_ResourceGroup) | Resource Group where the FortiGates are placed |
+| <a name="output_Username"></a> [Username](#output\_Username) | Fortigate access user |
