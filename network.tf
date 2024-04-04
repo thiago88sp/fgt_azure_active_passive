@@ -278,7 +278,7 @@ resource "azurerm_network_interface" "activeport3" {
     name                          = "ipconfig1"
     subnet_id                     = azurerm_subnet.hasyncsubnet.id
     private_ip_address_allocation = "Static"
-    private_ip_address            = var.activeport3
+    private_ip_address            = var.activeport3 # Using non-routable IP for HA-Sync. (https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq#what-address-ranges-can-i-use-in-my-virtual-networks)
 
   }
   depends_on = [
