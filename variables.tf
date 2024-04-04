@@ -16,9 +16,14 @@ variable "location" {
 
 // Vnets and subnets variables
 
-variable "vnetcidr" {
-  default     = "172.18.10.0/24"
-  description = "VNET address space"
+#variable "vnetcidr" {
+#  default     = "172.18.10.0/24"
+#  description = "VNET address space"
+#}
+
+variable "address_spaces" {
+  type    = list(string)
+  default = ["172.18.10.0/24", "100.64.0.0/24"]  # Lista de espaços de endereço desejados
 }
 
 variable "publiccidr" {
@@ -32,7 +37,8 @@ variable "privatecidr" {
 }
 
 variable "hacidr" {
-  default     = "172.18.10.192/26"
+  #default     = "172.18.10.192/26"
+  default = "100.64.0.0/26"
   description = "HA subnet address space"
 }
 
@@ -54,7 +60,7 @@ variable "port2gateway" {
 
 variable "port4gateway" {
   default = "172.18.10.129"
-  description = "HA subnet gateway IP."
+  description = "MGMT subnet gateway IP."
 }
 
 
@@ -87,7 +93,8 @@ variable "activeport2mask" {
 }
 
 variable "activeport3" {
-  default     = "172.18.10.196"
+  #default     = "172.18.10.196"
+  default     = "100.64.0.4"
   description = "Private HA address for the NIC."
 }
 
@@ -130,7 +137,8 @@ variable "passiveport2mask" {
 }
 
 variable "passiveport3" {
-  default     = "172.18.10.197"
+  #default     = "172.18.10.197"
+  default     = "100.64.0.5"
   description = "Private HA address for the NIC."
 }
 
