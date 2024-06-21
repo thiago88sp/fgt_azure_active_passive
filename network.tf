@@ -120,6 +120,32 @@ resource "azurerm_lb_rule" "externalLB-rule-2" {
   probe_id                       = azurerm_lb_probe.externalLB-rule-probe.id
 }
 
+resource "azurerm_lb_rule" "externalLB-rule-3" {
+  loadbalancer_id                = azurerm_lb.externalLB.id
+  name                           = "PublicLBRule-FE1-udp550"
+  protocol                       = "Udp"
+  frontend_port                  = 500
+  backend_port                   = 500
+  frontend_ip_configuration_name = "FGT-${local.customer_prefix}-ELB-FortinetExternalSubnet-FrontEnd"
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.elb_backend_address_pool.id]
+  probe_id                       = azurerm_lb_probe.externalLB-rule-probe.id
+  disable_outbound_snat          = true
+  enable_floating_ip             = true
+}
+
+resource "azurerm_lb_rule" "externalLB-rule-4" {
+  loadbalancer_id                = azurerm_lb.externalLB.id
+  name                           = "PublicLBRule-FE1-udp4500"
+  protocol                       = "Udp"
+  frontend_port                  = 4500
+  backend_port                   = 4500
+  frontend_ip_configuration_name = "FGT-${local.customer_prefix}-ELB-FortinetExternalSubnet-FrontEnd"
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.elb_backend_address_pool.id]
+  probe_id                       = azurerm_lb_probe.externalLB-rule-probe.id
+  disable_outbound_snat          = true
+  enable_floating_ip             = true
+}
+
 // ELB - Association
 
 resource "azurerm_network_interface_backend_address_pool_association" "backend_address_pool_association_activeport1" {
